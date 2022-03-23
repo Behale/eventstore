@@ -63,6 +63,8 @@ defmodule EventStore.Config.Parser do
     query
     |> URI.query_decoder()
     |> Enum.reduce([], fn
+      {"sslmode", "required"}, acc ->
+        [{:ssl, true} | acc]
       {"ssl", "true"}, acc ->
         [{:ssl, true} | acc]
 
